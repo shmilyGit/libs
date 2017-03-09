@@ -33,3 +33,6 @@ get_local_mac()						get_ip_mac.c					获取指定设备的MAC地址
 utf8_to_gb2312()					libs.c							UTF8 转 gb2312
 gb2312_to_utf8()					libs.c							gb2312 转 UTF8
 gb18030_to_utf8()					libs.c							gb18030 转 UTF8
+
+===================================时间 相关================================================
+custom_delay()						libs.c							秒延时函数

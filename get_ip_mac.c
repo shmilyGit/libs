@@ -26,7 +26,6 @@ unsigned long get_local_ip(char *dev)
     return ((struct sockaddr_in*)&req.ifr_addr)->sin_addr.s_addr;   
 }   
 
-//目前还有点问题
 int get_local_mac(char *dev, unsigned char *mac)   
 {   
     int s = socket(AF_INET, SOCK_DGRAM, 0);    
@@ -43,9 +42,16 @@ int get_local_mac(char *dev, unsigned char *mac)
 
 int main ()
 {
-	char ip[16];
-	unsigned char mac[10];
+	char ip[16] = {'\0'};
+	char mac[20] = {'\0'};
+	unsigned char tmp[6] = {'\0'};
 	unsigned long ret = get_local_ip("eth0");
+	int err;
 
-	printf ("%s\n", inet_ntop(AF_INET, (void *)&ret, ip, 16));
+	err = get_local_mac ("eth0", tmp);
+	sprintf (mac, "%02X:%02X:%02X:%02X:%02X:%02X", tmp[0], tmp[1], tmp[2],
+																								 tmp[3], tmp[4], tmp[5]);
+
+	printf ("IP: %s\n", inet_ntop(AF_INET, (void *)&ret, ip, 16));
+	printf ("MAC: %s\n", mac);
 }

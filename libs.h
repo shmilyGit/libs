@@ -28,6 +28,7 @@ int utf8_to_gb2312(char * , int  , char * , int );
 int gb2312_to_utf8(char * , int  , char * , int );
 int gb18030_to_utf8(char * , int  , char * , int );
 
+void custom_delay(int);
 
 
 

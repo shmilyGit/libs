@@ -376,3 +376,14 @@ int gb18030_to_utf8(char *inbuf,size_t inlen,char *outbuf,size_t outlen)
 {
     return code_convert("gb18030","utf-8",inbuf,inlen,outbuf,outlen);
 }
+
+void custom_delay (int seconds)
+{
+	time_t start, now;
+	
+	start = time(NULL);
+	do {
+		sleep(seconds);
+		now = time(NULL);
+	} while ((now - start) < seconds);
+}
