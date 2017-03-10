@@ -4,9 +4,7 @@
  *编译: gcc quote.c `pkg-config --cflags --libs glib2.0`
 */
 
-#include <stdio.h>
-#include <glib.h>
-#include <string.h>
+#include "puiblic.h"
 
 char *quote (char* string, int length)
 {

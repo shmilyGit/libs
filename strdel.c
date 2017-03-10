@@ -1,8 +1,5 @@
 //功能： 从一个字符串中删除指定的字符串
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "public.h"
 
 char * strdel(char *str, char *obj)
 {

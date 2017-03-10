@@ -1,4 +1,5 @@
 /** 常用的宏实现 **/
+#include "public.h"
 
 #define FUNC_POSITION \
 				do{printf("The %s function in the line %d is pass !\n", __FUNCTION__, __LINE__);}while(0)
