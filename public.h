@@ -10,6 +10,12 @@
 #include <unistd.h>   
 #include <sys/ioctl.h>   
 #include <linux/if_arp.h>   
+#include <syslog.h>
+#include <dirent.h>
+#include <errno.h>
+#include <iconv.h>
+#include <sys/stat.h>
+#include <stdarg.h>
 //#include <glib.h>
 
 #endif

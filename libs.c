@@ -1,3 +1,30 @@
+#include "public.h"
+
+/**
+ 	*功能：打印调试信息
+	*LOG_CONSOLE 控制终端输出
+	*LOG_SYSLOG控制syslog输出
+	*/
+
+void log_message(const int facility, const char *format, ...)
+{
+	va_list args;
+	char buf[1024];
+
+	va_start(args, format);
+	vsnprintf(buf, sizeof(buf), format, args);
+	va_end(args);
+
+	#ifdef LOG_CONSOLE_PRINT 
+		fprintf(stderr, "%s\n", buf);
+	#endif
+	
+	#ifdef LOG_SYSLOG_PRINT
+		syslog(facility, "%s", buf);
+	#endif
+}
+
+
 /**
 	*功能:在xml中取某一个标签的值
 	*
@@ -261,29 +288,34 @@ int count_file(char *dir_path)
 char * make_uuid()
 {
   char *id;
-  uuid_t uuid;
+  FILE *uuid_file;
 
-  /* Generate an UUID. */
-  uuid_generate (uuid);
-  if (uuid_is_null (uuid) == 1)
-    {
-      g_warning ("%s: failed to generate UUID", __FUNCTION__);
-      return NULL;
-    }
+  #define UUID_FILE "/proc/sys/kernel/random/uuid"
 
   /* Allocate mem for string to hold UUID. */
-  id = malloc (sizeof (char) * 37);
-	memset(id, 0, sizeof(char) * 37);
+  id = calloc (1, sizeof (char) * 37);
   if (id == NULL)
-    {
-      g_warning ("%s: Cannot export UUID to text: out of memory", __FUNCTION__);
-      return NULL;
-    }
+  {
+      log_message(LOG_ERR, "%s: Cannot export UUID to text: out of memory", __FUNCTION__);
+      goto error;
+  }
 
-  /* Export the UUID to text. */
-  uuid_unparse (uuid, id);
+  uuid_file = fopen(UUID_FILE, "r");
+  if(NULL == uuid_file)
+  {
+  	  log_message(LOG_ERR, "%s: Cannot open file: %s", __FUNCTION__, strerror(errno));
+	  goto mem_err;
+  }
 
+  fread(id, sizeof(char) *37, 1, uuid_file);
+  fclose(uuid_file);
+  
   return id;
+
+ mem_err:
+ 	free(id);
+ error:
+ 	return NULL;
 }
 
 
