@@ -4,7 +4,7 @@
  *编译: gcc quote.c `pkg-config --cflags --libs glib2.0`
 */
 
-#include "puiblic.h"
+#include "public.h"
 
 char *quote (char* string, int length)
 {
@@ -15,7 +15,7 @@ char *quote (char* string, int length)
   start = string;
   while ((start = strchr (start, '\''))) start++, count++;
 
-  new = new_start = g_malloc0 (length + count + 1);
+  new = new_start = calloc (1, length + count + 1);
 
   start = string;
   end = string + length;
@@ -40,5 +40,5 @@ int main()
 	char *str = "select name from stu where name=Lucy's";
 	char * p = quote (str, strlen(str));
 	printf ("%s\n", p);
-	g_free(p);
+	free(p);
 }
