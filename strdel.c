@@ -4,7 +4,7 @@
 char * strdel(char *str, char *obj)
 {
 	//使用的时候要判断一下返回值,不为NULL的时候,使用完一定要释放
-	int num_obj = 0, ret_size = 0, offsize = 0, end_str = 0;
+	int num_obj = 0, ret_size = 0, offsize = 0;
 	char *start = str;
 	char *p = NULL;
 	char *ret_buf = NULL, *ret = NULL;

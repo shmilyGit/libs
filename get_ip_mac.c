@@ -46,4 +46,6 @@ int main ()
 
 	printf ("IP: %s\n", inet_ntop(AF_INET, (void *)&ret, ip, 16));
 	printf ("MAC: %s\n", mac);
+	
+	return 0;
 }

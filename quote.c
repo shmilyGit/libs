@@ -41,4 +41,6 @@ int main()
 	char * p = quote (str, strlen(str));
 	printf ("%s\n", p);
 	free(p);
+
+	return 0;
 }

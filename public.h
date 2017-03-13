@@ -16,6 +16,7 @@
 #include <iconv.h>
 #include <sys/stat.h>
 #include <stdarg.h>
+#include <time.h>
 //#include <glib.h>
 
 #endif
